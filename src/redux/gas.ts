@@ -57,6 +57,7 @@ import { ethereumUtils, gasUtils } from '@rainbow-me/utils';
 import logger from 'logger';
 
 const { CUSTOM, NORMAL, GAS_PRICE_SOURCES } = gasUtils;
+const GAS_PRICE_INTERVAL = 5000; // 5 seconds
 
 let gasPricesHandle: NodeJS.Timeout | null = null;
 
@@ -407,7 +408,7 @@ export const gasPricesStartPolling = (network = networkTypes.mainnet) => async (
     } finally {
       gasPricesHandle = setTimeout(() => {
         watchGasPrices(network);
-      }, 15000); // 15 secs
+      }, GAS_PRICE_INTERVAL);
     }
   };
 
